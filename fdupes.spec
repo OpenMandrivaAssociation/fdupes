@@ -11,7 +11,6 @@ Group:		File tools
 Source:		http://netdial.caribe.net/~adrian2/programs/%{name}-%{version}.tar.bz2
 Patch:		%{name}-1.40.makefile.patch.bz2
 Url:		http://netdial.caribe.net/~adrian2/fdupes.html
-Buildroot:	%{_tmppath}/%{name}-%{version}
 
 %description
 FDUPES is a program for identifying or deleting duplicate files residing within
