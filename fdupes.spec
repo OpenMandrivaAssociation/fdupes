@@ -1,6 +1,6 @@
 %define name	fdupes
 %define version	1.40
-%define release	%mkrel 2
+%define release	%mkrel 4
 
 Name:		%{name}
 Version:	%{version}
