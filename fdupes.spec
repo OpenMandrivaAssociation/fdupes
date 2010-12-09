@@ -1,7 +1,7 @@
 %define name	fdupes
 %define version	1.50
 %define pre     PR2
-%define release	%mkrel 0.%{pre}.1
+%define release	%mkrel 0.%{pre}.2
 
 Name:		%{name}
 Version:	%{version}
