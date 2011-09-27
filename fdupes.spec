@@ -1,16 +1,14 @@
-%define name	fdupes
-%define version	1.50
-%define pre     PR2
-%define release	%mkrel 0.%{pre}.2
+%define pre PR2
 
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
-Summary:	Identify or delete duplicate files
-License:	BSD like
+Name:		fdupes
+Summary:		Identify or delete duplicate files
 Group:		File tools
+Version:		1.50
+Release:		%mkrel -c %{pre} 3
+License:		BSD like
 Url:		http://netdial.caribe.net/~adrian2/fdupes.html
-Source:		http://netdial.caribe.net/~adrian2/programs/%{name}-%{version}-%{pre}.tar.gz
+Source0:		http://netdial.caribe.net/~adrian2/programs/%{name}-%{version}-%{pre}.tar.gz
+Source1:		fdupes.macros
 Patch0:     %{name}-%{version}-destdir.patch
 # http://bugs.debian.org/213385
 Patch1:     %{name}-%{version}-compare-file.patch
@@ -18,7 +16,7 @@ Patch1:     %{name}-%{version}-compare-file.patch
 Patch2:     %{name}-%{version}-lfs.patch
 # http://bugs.debian.org/353789
 Patch3:     %{name}-%{version}-typo.patch
-Buildroot:	%{_tmppath}/%{name}-%{version}
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 FDUPES is a program for identifying or deleting duplicate files residing within
@@ -38,6 +36,7 @@ specified directories.
 rm -rf %{buildroot}
 install -d -m 755 %{buildroot}%{_bindir}
 install -m 755 %{name} %{buildroot}%{_bindir}
+install -D -m644 %{S:1} %{buildroot}%{_sysconfdir}/rpm/macros.d/fdupes.macros
 
 %check
 ./%{name} testdir
@@ -51,5 +50,5 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %doc CHANGES CONTRIBUTORS INSTALL README TODO
+%{_sysconfdir}/rpm/macros.d/fdupes.macros
 %{_bindir}/%{name}
-
