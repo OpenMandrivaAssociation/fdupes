@@ -31,15 +31,14 @@ specified directories.
 %install
 install -d -m 755 %{buildroot}%{_bindir}
 install -m 755 %{name} %{buildroot}%{_bindir}
+mkdir -p %{buildroot}%{_sysconfdir}/rpm
+install -m 0644 %{SOURCE1} %{buildroot}%{_sysconfdir}/rpm/
 
 %check
 ./%{name} testdir
 ./%{name} --omitfirst testdir
 ./%{name} --recurse testdir
 ./%{name} --size testdir
-
-mkdir -p %{buildroot}%{_sysconfdir}/rpm
-install -m 0644 %{SOURCE1} %{buildroot}%{_sysconfdir}/rpm/
 
 %files
 %doc CHANGES CONTRIBUTORS INSTALL README TODO
