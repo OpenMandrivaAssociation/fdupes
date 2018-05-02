@@ -22,7 +22,7 @@ specified directories.
 
 %build
 %setup_compile_flags
-%make CC=%{__cc} LDFLAGS=%{ldflags} COMPILER_OPTIONS="%{optflags}"
+%make CC=%{__cc} LDFLAGS="%{ldflags}" COMPILER_OPTIONS="%{optflags}"
 
 %install
 install -D -m755 %{name} %{buildroot}%{_bindir}/%{name}
