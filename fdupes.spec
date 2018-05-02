@@ -36,7 +36,7 @@ install -D -m644 %{SOURCE1} %{buildroot}%{_sysconfdir}/rpm/macros.%{name}
 ./%{name} --size testdir
 
 %files
-%doc CHANGES CONTRIBUTORS INSTALL README TODO
+%doc CHANGES CONTRIBUTORS INSTALL README
 %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.*
 %{_sysconfdir}/rpm/macros.fdupes
