@@ -1,38 +1,33 @@
-%define pre     PR2
-
 Summary:	Identify or delete duplicate files
 Name:		fdupes
-Version:	1.50
-Release:	0.%{pre}.3
+Version:	1.6.1
+Release:	1
 License:	BSD like
 Group:		File tools
-Url:		http://netdial.caribe.net/~adrian2/fdupes.html
-Source0:	http://netdial.caribe.net/~adrian2/programs/%{name}-%{version}-%{pre}.tar.gz
+Url:		https://github.com/adrianlopezroche/fdupes
+Source0:	https://github.com/adrianlopezroche/fdupes/archive/%{name}-%{version}.tar.gz
 Source1:	macros.fdupes
-Patch0:		%{name}-%{version}-destdir.patch
-# http://bugs.debian.org/213385
-Patch1:		%{name}-%{version}-compare-file.patch
-# http://bugs.debian.org/447601
-Patch2:		%{name}-%{version}-lfs.patch
-# http://bugs.debian.org/353789
-Patch3:		%{name}-%{version}-typo.patch
+# From upstream.
+Patch0:		%{url}/commit/315f6702f1cc37036d9f826314245b44a781c387.patch#/%{name}-1.6.1-delete_old_TODO.patch
+Patch1:		%{url}/commit/e95ec42dc178eff0410880c3dc4c0dac3df442df.patch#/%{name}-1.6.1-option_sort_by_ctime.patch
+Patch2:		%{url}/commit/88f3d2dd31fbef7e539b2523724221e8e8e5a9f0.patch#/%{name}-1.6.1-allow_a_instead_of_all.patch
 
 %description
 FDUPES is a program for identifying or deleting duplicate files residing within
 specified directories.
 
 %prep
-%setup -qn %{name}-%{version}-%{pre}
+%setup -q
 %apply_patches
 
 %build
-%make COMPILER_OPTIONS="%{optflags}"
+%setup_compile_flags
+%make CC=%{__cc} LDFLAGS="%{ldflags}" COMPILER_OPTIONS="%{optflags}"
 
 %install
-install -d -m 755 %{buildroot}%{_bindir}
-install -m 755 %{name} %{buildroot}%{_bindir}
-mkdir -p %{buildroot}%{_sysconfdir}/rpm
-install -m 0644 %{SOURCE1} %{buildroot}%{_sysconfdir}/rpm/
+install -D -m755 %{name} %{buildroot}%{_bindir}/%{name}
+install -D -m644 %{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
+install -D -m644 %{SOURCE1} %{buildroot}%{_sysconfdir}/rpm/macros.%{name}
 
 %check
 ./%{name} testdir
@@ -41,7 +36,7 @@ install -m 0644 %{SOURCE1} %{buildroot}%{_sysconfdir}/rpm/
 ./%{name} --size testdir
 
 %files
-%doc CHANGES CONTRIBUTORS INSTALL README TODO
+%doc CHANGES CONTRIBUTORS INSTALL README
 %{_bindir}/%{name}
+%{_mandir}/man1/%{name}.*
 %{_sysconfdir}/rpm/macros.fdupes
-
