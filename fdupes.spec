@@ -18,7 +18,7 @@ specified directories.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 %build
 %setup_compile_flags
