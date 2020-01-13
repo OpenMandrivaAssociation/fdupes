@@ -1,7 +1,7 @@
 Summary:	Identify or delete duplicate files
 Name:		fdupes
-Version:	1.6.1
-Release:	2
+Version:	2.0.0
+Release:	1
 License:	BSD like
 Group:		File tools
 Url:		https://github.com/adrianlopezroche/fdupes
