@@ -18,6 +18,7 @@ specified directories.
 
 %build
 %setup_compile_flags
+%configure
 %make CC=%{__cc} LDFLAGS="%{ldflags}" COMPILER_OPTIONS="%{optflags}"
 
 %install
