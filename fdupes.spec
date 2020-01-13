@@ -20,6 +20,7 @@ specified directories.
 %autopatch -p1
 
 %build
+autoreconf --install
 %setup_compile_flags
 %configure
 %make CC=%{__cc} LDFLAGS="%{ldflags}" COMPILER_OPTIONS="%{optflags}"
