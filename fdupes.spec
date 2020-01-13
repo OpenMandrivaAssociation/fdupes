@@ -7,8 +7,6 @@ Group:		File tools
 Url:		https://github.com/adrianlopezroche/fdupes
 Source0:	https://github.com/adrianlopezroche/fdupes/archive/%{name}-%{version}.tar.gz
 Source1:	macros.fdupes
-# From upstream.
-Patch2:		%{url}/commit/88f3d2dd31fbef7e539b2523724221e8e8e5a9f0.patch#/%{name}-1.6.1-allow_a_instead_of_all.patch
 
 %description
 FDUPES is a program for identifying or deleting duplicate files residing within
