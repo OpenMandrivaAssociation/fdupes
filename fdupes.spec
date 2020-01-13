@@ -11,6 +11,7 @@ Source1:	macros.fdupes
 BuildRequires:  autoconf
 BuildRequires:  automake
 BuildRequires:  pkgconfig(ncurses)
+BuildRequires:  pkgconfig(libpcre2-posix)
 
 %description
 FDUPES is a program for identifying or deleting duplicate files residing within
