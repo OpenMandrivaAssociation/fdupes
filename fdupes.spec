@@ -12,6 +12,7 @@ BuildRequires:  autoconf
 BuildRequires:  automake
 BuildRequires:  pkgconfig(ncurses)
 BuildRequires:  pkgconfig(libpcre2-posix)
+BuildRequires:	pkgconfig(sqlite3)
 
 %description
 FDUPES is a program for identifying or deleting duplicate files residing within
