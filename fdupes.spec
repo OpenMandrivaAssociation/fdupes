@@ -1,15 +1,14 @@
 Summary:	Identify or delete duplicate files
 Name:		fdupes
-Version:	2.3.1
+Version:	2.3.2
 Release:	1
 License:	BSD like
 Group:		File tools
 Url:		https://github.com/adrianlopezroche/fdupes
-Source0:	https://github.com/adrianlopezroche/fdupes/archive/%{name}-%{version}.tar.gz
+Source0:	https://github.com/adrianlopezroche/fdupes/releases/download/v%{version}/fdupes-%{version}.tar.gz
 Source1:	macros.fdupes
 	
-BuildRequires:  autoconf
-BuildRequires:  automake
+BuildSystem:	autotools
 BuildRequires:  pkgconfig(ncurses)
 BuildRequires:  pkgconfig(libpcre2-posix)
 BuildRequires:	pkgconfig(sqlite3)
@@ -18,29 +17,21 @@ BuildRequires:	pkgconfig(sqlite3)
 FDUPES is a program for identifying or deleting duplicate files residing within
 specified directories.
 
-%prep
-%setup -q
-%autopatch -p1
-
-%build
-autoreconf --install
-%setup_compile_flags
-%configure
-%make CC=%{__cc} LDFLAGS="%{ldflags}" COMPILER_OPTIONS="%{optflags}"
-
-%install
-install -D -m755 %{name} %{buildroot}%{_bindir}/%{name}
-install -D -m644 %{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
+%install -a
 install -D -m644 %{SOURCE1} %{buildroot}%{_sysconfdir}/rpm/macros.%{name}
 
+%if ! %{cross_compiling}
 %check
+cd _OMV_rpm_build
 ./%{name} testdir
 ./%{name} --omitfirst testdir
 ./%{name} --recurse testdir
 ./%{name} --size testdir
+%endif
 
 %files
 %doc CHANGES CONTRIBUTORS INSTALL README
 %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.*
+%{_mandir}/man7/%{name}-help.*
 %{_sysconfdir}/rpm/macros.fdupes
